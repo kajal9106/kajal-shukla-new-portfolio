@@ -1,0 +1,1737 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kajal Shukla - Senior UI/UX Designer</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --paper: #faf9f6;
+                --paper-dim: #f1efea;
+                --ink: #14161a;
+                --ink-soft: #4a4c52;
+                --blueprint: #3355ff;
+                --blueprint-dim: #e7ebff;
+                --signal: #ff5a36;
+                --signal-dim: #ffe7df;
+                --sun: #ffc53d;
+                --line: #d8d6d0;
+                --line-strong: #b9b6ac;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--paper);
+                color: var(--ink);
+                font-family: "Inter", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+            }
+            ::selection {
+                background: var(--blueprint);
+                color: var(--paper);
+            }
+            .mono {
+                font-family: "IBM Plex Mono", monospace;
+            }
+            .display {
+                font-family: "Space Grotesk", sans-serif;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            .wrap {
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0 56px;
+            }
+            @media (max-width: 760px) {
+                .wrap {
+                    padding: 0 24px;
+                }
+            }
+
+            .bracketed {
+                position: relative;
+            }
+            .bracketed::before,
+            .bracketed::after {
+                content: "";
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                border-color: var(--blueprint);
+                opacity: 0;
+                transition:
+                    opacity 0.35s ease,
+                    transform 0.35s ease;
+            }
+            .bracketed::before {
+                top: -1px;
+                left: -1px;
+                border-top: 1.5px solid;
+                border-left: 1.5px solid;
+                transform: translate(-4px, -4px);
+            }
+            .bracketed::after {
+                bottom: -1px;
+                right: -1px;
+                border-bottom: 1.5px solid;
+                border-right: 1.5px solid;
+                transform: translate(4px, 4px);
+            }
+            .bracketed:hover::before,
+            .bracketed:hover::after {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+
+            .tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--blueprint);
+                border: 1px solid var(--blueprint-dim);
+                background: var(--blueprint-dim);
+                padding: 4px 8px;
+                border-radius: 2px;
+            }
+
+            /* ---------- nav ---------- */
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                background: rgba(250, 249, 246, 0.86);
+                backdrop-filter: blur(8px);
+                border-bottom: 1px solid var(--line);
+            }
+            nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 64px;
+            }
+            .logo {
+                font-family: "IBM Plex Mono", monospace;
+                font-weight: 500;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .logo .dot {
+                width: 6px;
+                height: 6px;
+                background: var(--signal);
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .navlinks {
+                display: flex;
+                gap: 36px;
+                font-size: 13px;
+                font-family: "IBM Plex Mono", monospace;
+            }
+            .navlinks a {
+                color: var(--ink-soft);
+                position: relative;
+                padding: 4px 0;
+                transition: color 0.2s;
+            }
+            .navlinks a:hover {
+                color: var(--ink);
+            }
+            .navlinks a::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: 0;
+                height: 1px;
+                background: var(--blueprint);
+                transition: width 0.25s ease;
+            }
+            .navlinks a:hover::after {
+                width: 100%;
+            }
+            .nav-cta {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                border: 1px solid var(--ink);
+                padding: 8px 14px;
+                transition:
+                    background 0.2s,
+                    color 0.2s;
+            }
+            .nav-cta:hover {
+                background: var(--ink);
+                color: var(--paper);
+            }
+            @media (max-width: 760px) {
+                .navlinks {
+                    display: none;
+                }
+            }
+
+            /* ---------- hero ---------- */
+            .hero {
+                position: relative;
+                padding: 158px 0 80px;
+                overflow: hidden;
+                background-image: linear-gradient(var(--line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+                background-size: 56px 56px;
+                background-position: center -1px;
+                -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+                mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+            }
+            .hero-inner {
+                position: relative;
+            }
+            .hero-eyebrow {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--blueprint);
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 24px;
+            }
+            .hero-eyebrow .bar {
+                width: 28px;
+                height: 1px;
+                background: var(--blueprint);
+            }
+            .hero-eyebrow .pulse {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--signal);
+                position: relative;
+            }
+            .hero-eyebrow .pulse::after {
+                content: "";
+                position: absolute;
+                inset: -4px;
+                border-radius: 50%;
+                border: 1px solid var(--signal);
+                animation: pulse 2.2s ease-out infinite;
+            }
+            @keyframes pulse {
+                0% {
+                    transform: scale(0.6);
+                    opacity: 0.9;
+                }
+                100% {
+                    transform: scale(2.2);
+                    opacity: 0;
+                }
+            }
+
+            .hero-grid {
+                display: grid;
+                grid-template-columns: 1.15fr 0.85fr;
+                gap: 40px;
+                align-items: start;
+            }
+            h1.name {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+                font-size: clamp(46px, 7.2vw, 92px);
+                line-height: 0.96;
+                letter-spacing: -0.025em;
+                margin-bottom: 20px;
+            }
+            h1.name .accent {
+                color: var(--blueprint);
+                position: relative;
+            }
+            .role-line {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 500;
+                font-size: clamp(18px, 2.2vw, 25px);
+                color: var(--ink-soft);
+                max-width: 600px;
+                line-height: 1.4;
+                margin-bottom: 36px;
+            }
+            .role-line em {
+                font-style: normal;
+                color: var(--ink);
+                border-bottom: 2px solid var(--signal);
+            }
+
+            .hero-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 14px;
+                margin-bottom: 56px;
+            }
+            .btn {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 13px;
+                padding: 13px 22px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.2s ease;
+                border: 1px solid var(--ink);
+                border-radius: 2px;
+            }
+            .btn-primary {
+                background: var(--ink);
+                color: var(--paper);
+            }
+            .btn-primary:hover {
+                background: var(--blueprint);
+                border-color: var(--blueprint);
+                transform: translateY(-2px);
+            }
+            .btn-ghost {
+                color: var(--ink);
+            }
+            .btn-ghost:hover {
+                background: var(--ink);
+                color: var(--paper);
+                transform: translateY(-2px);
+            }
+
+            /* floating mood cluster */
+            .cluster {
+                position: relative;
+                height: 420px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .float-card {
+                position: absolute;
+                background: var(--paper);
+                border: 1px solid var(--line-strong);
+                box-shadow: 0 18px 40px -20px rgba(20, 22, 26, 0.25);
+                border-radius: 6px;
+                overflow: hidden;
+                animation: drift 7s ease-in-out infinite;
+            }
+            .float-card .fc-head {
+                display: flex;
+                gap: 5px;
+                padding: 8px 10px;
+                border-bottom: 1px solid var(--line);
+            }
+            .float-card .fc-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--line-strong);
+            }
+            .fc1 {
+                width: 300px;
+                top: 6px;
+                left: 6px;
+                transform: rotate(-6deg);
+                animation-delay: 0.1s;
+            }
+            .fc2 {
+                width: 270px;
+                top: 150px;
+                left: 150px;
+                transform: rotate(4deg);
+                z-index: 3;
+                animation-delay: 1.2s;
+            }
+            .fc3 {
+                width: 250px;
+                top: 270px;
+                left: -10px;
+                transform: rotate(8deg);
+                animation-delay: 2.1s;
+            }
+            .fc4 {
+                width: 200px;
+                top: 10px;
+                left: 280px;
+                transform: rotate(-3deg);
+                animation-delay: 0.8s;
+            }
+            @keyframes drift {
+                0%,
+                100% {
+                    transform: translateY(0) rotate(var(--r, 0deg));
+                }
+                50% {
+                    transform: translateY(-9px) rotate(var(--r, 0deg));
+                }
+            }
+            .fc1 {
+                --r: -6deg;
+            }
+            .fc2 {
+                --r: 4deg;
+            }
+            .fc3 {
+                --r: 8deg;
+            }
+            .fc4 {
+                --r: -3deg;
+            }
+            .fc-body {
+                padding: 12px;
+            }
+            .bar-l {
+                height: 8px;
+                background: var(--blueprint-dim);
+                border-radius: 2px;
+                margin-bottom: 6px;
+            }
+            .bar-s {
+                height: 6px;
+                background: var(--paper-dim);
+                border: 1px solid var(--line);
+                border-radius: 2px;
+                margin-bottom: 6px;
+                width: 70%;
+            }
+            .swatch-row {
+                display: flex;
+                gap: 6px;
+                margin-top: 8px;
+            }
+            .swatch {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+            }
+            .label-chip {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 9px;
+                color: var(--blueprint);
+                background: var(--blueprint-dim);
+                padding: 2px 6px;
+                border-radius: 2px;
+                display: inline-block;
+                margin-bottom: 8px;
+            }
+            @media (max-width: 900px) {
+                .hero-grid {
+                    grid-template-columns: 1fr;
+                }
+                .cluster {
+                    height: 300px;
+                    margin-top: 20px;
+                }
+            }
+
+            .measure-row {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                border-top: 1px solid var(--line);
+                margin-top: 24px;
+            }
+            .measure {
+                padding: 20px 18px 0;
+                border-left: 1px solid var(--line);
+                position: relative;
+            }
+            .measure:first-child {
+                border-left: none;
+                padding-left: 0;
+            }
+            .measure .val {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+                font-size: clamp(26px, 3.4vw, 38px);
+                color: var(--ink);
+            }
+            .measure .lbl {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                color: var(--ink-soft);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-top: 6px;
+            }
+            @media (max-width: 700px) {
+                .measure-row {
+                    grid-template-columns: repeat(2, 1fr);
+                    row-gap: 24px;
+                }
+                .measure:nth-child(3) {
+                    border-left: none;
+                }
+            }
+
+            /* ---------- section shell ---------- */
+            section {
+                padding: 96px 0;
+                border-top: 1px solid var(--line);
+                position: relative;
+                z-index: 1;
+                background: var(--paper);
+            }
+            .sec-head {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                margin-bottom: 48px;
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+            .sec-index {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--blueprint);
+                letter-spacing: 0.08em;
+            }
+            h2.sec-title {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+                font-size: clamp(28px, 3.6vw, 42px);
+                letter-spacing: -0.01em;
+            }
+            .sec-note {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--ink-soft);
+                max-width: 220px;
+                text-align: right;
+            }
+            @media (max-width: 700px) {
+                .sec-note {
+                    text-align: left;
+                    max-width: none;
+                }
+            }
+
+            .reveal {
+                opacity: 0;
+                transform: translateY(18px);
+                transition:
+                    opacity 0.6s ease,
+                    transform 0.6s ease;
+            }
+            .reveal.in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* ---------- about ---------- */
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1.3fr 0.9fr;
+                gap: 64px;
+            }
+            .about-grid p {
+                font-size: 17px;
+                line-height: 1.75;
+                color: var(--ink-soft);
+                margin-bottom: 18px;
+            }
+            .about-grid p strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .ai-box {
+                border: 1px solid var(--line-strong);
+                padding: 24px;
+                background: var(--paper-dim);
+                border-radius: 6px;
+            }
+            .ai-box .tag {
+                margin-bottom: 14px;
+            }
+            .ai-box ul {
+                list-style: none;
+                font-size: 13.5px;
+                color: var(--ink-soft);
+                line-height: 1.9;
+            }
+            .ai-box li::before {
+                content: "→ ";
+                color: var(--blueprint);
+                font-family: "IBM Plex Mono", monospace;
+            }
+            @media (max-width: 820px) {
+                .about-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* ---------- skills / component library ---------- */
+            .lib-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            .lib-card {
+                background: var(--paper);
+                padding: 26px 24px;
+                border: 1px solid var(--line);
+                border-radius: 6px;
+                transition: all 0.28s ease;
+            }
+            .lib-card:hover {
+                background: var(--paper-dim);
+                transform: translateY(-4px);
+                box-shadow: 0 16px 32px -20px rgba(20, 22, 26, 0.3);
+                border-color: var(--blueprint);
+            }
+            .lib-card .code {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                color: var(--blueprint);
+                letter-spacing: 0.05em;
+                margin-bottom: 10px;
+            }
+            .lib-card h3 {
+                font-family: "Space Grotesk", sans-serif;
+                font-size: 17px;
+                font-weight: 600;
+                margin-bottom: 12px;
+            }
+            .lib-card p {
+                font-size: 13.5px;
+                color: var(--ink-soft);
+                line-height: 1.7;
+            }
+            @media (max-width: 820px) {
+                .lib-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .chip-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 56px;
+            }
+            .chip {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                border: 1px solid var(--line-strong);
+                padding: 7px 12px;
+                color: var(--ink-soft);
+                transition: all 0.2s ease;
+                border-radius: 20px;
+            }
+            .chip:hover {
+                border-color: var(--blueprint);
+                color: var(--blueprint);
+                background: var(--blueprint-dim);
+            }
+
+            /* ---------- experience log ---------- */
+            .log {
+                border-top: 1px solid var(--line);
+            }
+            .log-entry {
+                display: grid;
+                grid-template-columns: 120px 1fr;
+                gap: 28px;
+                padding: 26px 0;
+                border-bottom: 1px solid var(--line);
+            }
+            .log-date {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--ink-soft);
+                padding-top: 4px;
+            }
+            .log-body h3 {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 600;
+                font-size: 19px;
+                margin-bottom: 4px;
+            }
+            .log-body .co {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--blueprint);
+                margin-bottom: 14px;
+                display: block;
+            }
+            .log-items {
+                display: flex;
+                flex-direction: column;
+                gap: 11px;
+            }
+            .log-item {
+                display: flex;
+                gap: 12px;
+                font-size: 14.5px;
+                color: var(--ink-soft);
+                line-height: 1.6;
+            }
+            .log-item .lbl {
+                flex: none;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 10px;
+                color: var(--blueprint);
+                background: var(--blueprint-dim);
+                padding: 3px 6px;
+                height: fit-content;
+                margin-top: 2px;
+                letter-spacing: 0.04em;
+                border-radius: 2px;
+            }
+            @media (max-width: 700px) {
+                .log-entry {
+                    grid-template-columns: 1fr;
+                }
+                .log-date {
+                    padding-top: 0;
+                }
+            }
+
+            /* ---------- projects ---------- */
+            .proj {
+                border: 1px solid var(--line);
+                margin-bottom: 24px;
+                overflow: hidden;
+                border-radius: 8px;
+                transition:
+                    box-shadow 0.3s ease,
+                    transform 0.3s ease;
+            }
+            .proj:hover {
+                box-shadow: 0 24px 48px -28px rgba(20, 22, 26, 0.35);
+                transform: translateY(-3px);
+            }
+            .proj-top {
+                display: grid;
+                grid-template-columns: 1fr 1.15fr;
+            }
+            .proj-visual {
+                background: linear-gradient(160deg, var(--paper-dim), var(--paper));
+                padding: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid var(--line);
+                min-height: 260px;
+            }
+            .proj-info {
+                padding: 32px 34px;
+            }
+            .proj-info .code {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                color: var(--blueprint);
+                margin-bottom: 10px;
+                letter-spacing: 0.05em;
+            }
+            .proj-info h3 {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+                font-size: 24px;
+                margin-bottom: 6px;
+            }
+            .proj-info .role {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 12px;
+                color: var(--ink-soft);
+                margin-bottom: 16px;
+                display: block;
+            }
+            .proj-info p {
+                font-size: 14.5px;
+                color: var(--ink-soft);
+                line-height: 1.75;
+                margin-bottom: 16px;
+            }
+            .proj-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .proj-tags span {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 10.5px;
+                border: 1px solid var(--line-strong);
+                padding: 4px 8px;
+                color: var(--ink-soft);
+                border-radius: 20px;
+            }
+            @media (max-width: 800px) {
+                .proj-top {
+                    grid-template-columns: 1fr;
+                }
+                .proj-visual {
+                    border-right: none;
+                    border-bottom: 1px solid var(--line);
+                }
+            }
+
+            .work-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                margin-bottom: 50px;
+            }
+            .work-card {
+                display: block;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                overflow: hidden;
+                background: var(--paper);
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease,
+                    border-color 0.3s ease;
+            }
+            .work-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 24px 44px -26px rgba(20, 22, 26, 0.35);
+                border-color: var(--blueprint);
+            }
+            .work-thumb {
+                aspect-ratio: 4/3;
+                overflow: hidden;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+            .thumb-tint-blue {
+                background: linear-gradient(155deg, #eef1ff, #f9f8f5 65%);
+            }
+            .thumb-tint-signal {
+                background: linear-gradient(155deg, #fff0eb, #f9f8f5 65%);
+            }
+            .thumb-tint-sun {
+                background: linear-gradient(155deg, #fff7e3, #f9f8f5 65%);
+            }
+            .thumb-icon {
+                width: 100%;
+                height: 100%;
+                transition: transform 0.5s ease;
+            }
+            .work-card:hover .thumb-icon {
+                transform: scale(1.04);
+            }
+            .ti-frame {
+                fill: none;
+                stroke: var(--line-strong);
+                stroke-width: 1;
+            }
+            .ti-dot {
+                fill: var(--line-strong);
+            }
+            .ti-label {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 8px;
+                letter-spacing: 0.08em;
+                fill: var(--ink-soft);
+            }
+            .thumb-tint-blue .ti-fill {
+                fill: var(--blueprint);
+                opacity: 0.85;
+            }
+            .thumb-tint-blue .ti-stroke {
+                stroke: var(--blueprint);
+                fill: none;
+                stroke-width: 2;
+            }
+            .thumb-tint-blue .ti-accent {
+                fill: var(--signal);
+            }
+            .thumb-tint-blue .ti-accent-stroke {
+                stroke: var(--signal);
+            }
+            .thumb-tint-signal .ti-fill {
+                fill: var(--signal);
+                opacity: 0.85;
+            }
+            .thumb-tint-signal .ti-stroke {
+                stroke: var(--signal);
+                fill: none;
+                stroke-width: 2;
+            }
+            .thumb-tint-signal .ti-accent {
+                fill: var(--blueprint);
+            }
+            .thumb-tint-signal .ti-accent-stroke {
+                stroke: var(--blueprint);
+            }
+            .thumb-tint-sun .ti-fill {
+                fill: var(--sun);
+                opacity: 0.9;
+            }
+            .thumb-tint-sun .ti-stroke {
+                stroke: #b98a00;
+                fill: none;
+                stroke-width: 2;
+            }
+            .thumb-tint-sun .ti-accent {
+                fill: var(--signal);
+            }
+            .thumb-tint-sun .ti-accent-stroke {
+                stroke: var(--signal);
+            }
+            .work-body {
+                padding: 20px;
+            }
+            .work-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+            .work-top h3 {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 600;
+                font-size: 17px;
+            }
+            .work-go {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 13px;
+                color: var(--blueprint);
+                flex: none;
+                transition: transform 0.25s ease;
+            }
+            .work-card:hover .work-go {
+                transform: translate(2px, -2px);
+            }
+            .work-body p {
+                font-size: 13.5px;
+                color: var(--ink-soft);
+                line-height: 1.6;
+                margin-bottom: 14px;
+                min-height: 42px;
+            }
+            .work-body .proj-tags span {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+            @media (max-width: 960px) {
+                .work-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 640px) {
+                .work-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            svg.mock {
+                width: 100%;
+                height: auto;
+                max-width: 280px;
+            }
+            .mock .frame {
+                fill: var(--paper);
+                stroke: var(--line-strong);
+                stroke-width: 1;
+            }
+            .mock .fillblue {
+                fill: var(--blueprint);
+            }
+            .mock .fillsignal {
+                fill: var(--signal);
+            }
+            .mock .fillsun {
+                fill: var(--sun);
+            }
+            .mock .fillline {
+                fill: var(--line);
+            }
+            .mock .strokeblue {
+                stroke: var(--blueprint);
+                stroke-width: 1;
+                fill: none;
+            }
+
+            /* ---------- footer / contact ---------- */
+            footer {
+                padding: 96px 0 56px;
+                border-top: 1px solid var(--line);
+            }
+            .cta-block {
+                text-align: left;
+                margin-bottom: 72px;
+            }
+            .cta-block .sec-index {
+                margin-bottom: 20px;
+            }
+            .cta-block h2 {
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+                font-size: clamp(32px, 5.4vw, 60px);
+                letter-spacing: -0.02em;
+                max-width: 820px;
+                line-height: 1.08;
+                margin-bottom: 34px;
+            }
+            .contact-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                border-top: 1px solid var(--line);
+                padding-top: 32px;
+            }
+            .contact-grid .lbl {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                color: var(--blueprint);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: 8px;
+            }
+            .contact-grid .val {
+                font-size: 14.5px;
+            }
+            .contact-grid a.val:hover {
+                color: var(--blueprint);
+            }
+            @media (max-width: 760px) {
+                .contact-grid {
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 28px;
+                }
+            }
+            .foot-bottom {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 64px;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 11px;
+                color: var(--ink-soft);
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="wrap">
+                <nav>
+                    <div class="logo"><span class="dot"></span>KAJAL SHUKLA</div>
+                    <div class="navlinks">
+                        <a href="#about">About</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#experience">Experience</a>
+                        <a href="#work">Work</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <a class="nav-cta" href="#contact">Get in touch</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- HERO -->
+            <section class="hero" style="border-top: none">
+                <div class="wrap hero-inner">
+                    <div class="hero-eyebrow">
+                        <span class="pulse"></span><span class="bar"></span>Ahmedabad, India · Available for immediate
+                        joining
+                    </div>
+
+                    <div class="hero-grid">
+                        <div>
+                            <h1 class="name">Kajal <span class="accent">Shukla</span></h1>
+                            <p class="role-line">
+                                Senior UI/UX Designer shaping <em>intuitive, accessible</em> digital products from ERP
+                                dashboards to healthcare apps, end to end.
+                            </p>
+                            <div class="hero-actions">
+                                <a class="btn btn-primary" href="#work">View selected work →</a>
+                                <a class="btn btn-ghost" href="mailto:kajalshukla982@gmail.com">Email me</a>
+                            </div>
+                        </div>
+
+                        <div class="cluster" aria-hidden="true">
+                            <div class="float-card fc1">
+                                <div class="fc-head">
+                                    <span class="fc-dot"></span><span class="fc-dot"></span><span class="fc-dot"></span>
+                                </div>
+                                <div class="fc-body">
+                                    <span class="label-chip">DASHBOARD</span>
+                                    <div class="bar-l" style="width: 80%"></div>
+                                    <div class="bar-s"></div>
+                                    <div class="swatch-row">
+                                        <div class="swatch" style="background: var(--blueprint)"></div>
+                                        <div class="swatch" style="background: var(--signal)"></div>
+                                        <div class="swatch" style="background: var(--sun)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="float-card fc2">
+                                <div class="fc-head"><span class="fc-dot"></span><span class="fc-dot"></span></div>
+                                <div class="fc-body">
+                                    <span class="label-chip" style="color: var(--signal); background: var(--signal-dim)"
+                                        >MOBILE FLOW</span
+                                    >
+                                    <div class="bar-l" style="background: var(--signal-dim); width: 60%"></div>
+                                    <div class="bar-s"></div>
+                                    <div class="bar-s" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div class="float-card fc3">
+                                <div class="fc-body" style="padding: 14px">
+                                    <span class="label-chip">WCAG ✓</span>
+                                    <div class="bar-s" style="width: 90%"></div>
+                                    <div class="bar-s" style="width: 55%"></div>
+                                </div>
+                            </div>
+                            <div class="float-card fc4">
+                                <div class="fc-body" style="padding: 10px">
+                                    <div
+                                        class="swatch"
+                                        style="
+                                            background: var(--blueprint);
+                                            width: 100%;
+                                            height: 14px;
+                                            margin-bottom: 5px;
+                                        "
+                                    ></div>
+                                    <div class="swatch" style="background: var(--sun); width: 100%; height: 14px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="measure-row reveal" id="stats">
+                        <div class="measure">
+                            <div class="val">5+</div>
+                            <div class="lbl">Years Experience</div>
+                        </div>
+                        <div class="measure">
+                            <div class="val">40+</div>
+                            <div class="lbl">Products Shipped</div>
+                        </div>
+                        <div class="measure">
+                            <div class="val">6</div>
+                            <div class="lbl">Industries Designed For</div>
+                        </div>
+                        <div class="measure">
+                            <div class="val">WCAG</div>
+                            <div class="lbl">Accessibility First</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="about">
+                <div class="wrap">
+                    <div class="sec-head">
+                        <div>
+                            <div class="sec-index mono">§ 01 — PROFILE</div>
+                            <h2 class="sec-title">About</h2>
+                        </div>
+                        <div class="sec-note">A brief on how I work, and where AI fits into the process.</div>
+                    </div>
+                    <div class="about-grid reveal">
+                        <div>
+                            <p>
+                                <strong>5+ years</strong> designing intuitive, accessible, user-centered digital
+                                products across ERP, healthcare, education, e-commerce, and event management platforms.
+                            </p>
+                            <p>
+                                I've led <strong>40+ end-to-end product designs</strong> from user research and
+                                information architecture through high-fidelity prototyping and developer handoff with
+                                a track record of measurably improving usability and task completion.
+                            </p>
+                            <p>
+                                I work closely with developers, product managers, and stakeholders, and hold
+                                accessibility, <strong>WCAG-compliant design</strong>, as a non-negotiable, not an
+                                afterthought.
+                            </p>
+                        </div>
+                        <div class="ai-box bracketed">
+                            <span class="tag">AI-assisted workflow</span>
+                            <ul>
+                                <li>Figma AI &amp; Uizard / Galileo AI for rapid wireframing</li>
+                                <li>Midjourney / DALL·E for concept &amp; moodboard generation</li>
+                                <li>ChatGPT / Claude for UX writing &amp; research synthesis</li>
+                                <li>Framer AI for fast, interactive prototypes</li>
+                                <li>AI-assisted usability analysis without compromising quality</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SKILLS -->
+            <section id="skills">
+                <div class="wrap">
+                    <div class="sec-head">
+                        <div>
+                            <div class="sec-index mono">§ 02 - CAPABILITIES</div>
+                            <h2 class="sec-title">Component library</h2>
+                        </div>
+                        <div class="sec-note">Core skills, organized the way I organize a design system.</div>
+                    </div>
+                    <div class="lib-grid reveal">
+                        <div class="lib-card">
+                            <div class="code">01 / RESEARCH</div>
+                            <h3>UX Research &amp; Strategy</h3>
+                            <p>User research, personas, journey mapping, UX audits, heuristic evaluation.</p>
+                        </div>
+                        <div class="lib-card">
+                            <div class="code">02 / DESIGN</div>
+                            <h3>Design &amp; Prototyping</h3>
+                            <p>Wireframing, interaction design, responsive design, accessibility (WCAG).</p>
+                        </div>
+                        <div class="lib-card">
+                            <div class="code">03 / VALIDATE</div>
+                            <h3>Usability &amp; Optimization</h3>
+                            <p>Usability testing, feedback analysis, task flow optimization.</p>
+                        </div>
+                        <div class="lib-card">
+                            <div class="code">04 / SYSTEMS</div>
+                            <h3>Design Systems</h3>
+                            <p>Component libraries, scalable design, visual consistency across products.</p>
+                        </div>
+                        <div class="lib-card">
+                            <div class="code">05 / TEAM</div>
+                            <h3>Collaboration</h3>
+                            <p>Agile, developer handoff, stakeholder communication.</p>
+                        </div>
+                        <div class="lib-card">
+                            <div class="code">06 / BUILD</div>
+                            <h3>Front-End Knowledge</h3>
+                            <p>
+                                HTML5, CSS3, JavaScript, React, Bootstrap, Material UI, Styled Components, Sass, jQuery.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chip-row reveal">
+                        <span class="chip">Figma</span><span class="chip">Adobe XD</span
+                        ><span class="chip">Photoshop</span> <span class="chip">Illustrator</span
+                        ><span class="chip">Framer</span><span class="chip">Canva</span>
+                        <span class="chip">Figma AI</span><span class="chip">Midjourney</span
+                        ><span class="chip">Uizard</span> <span class="chip">Galileo AI</span
+                        ><span class="chip">ChatGPT / Claude</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPERIENCE -->
+            <section id="experience">
+                <div class="wrap">
+                    <div class="sec-head">
+                        <div>
+                            <div class="sec-index mono">§ 03 - HISTORY</div>
+                            <h2 class="sec-title">Experience log</h2>
+                        </div>
+                        <div class="sec-note">One role, continuously shipped logged by contribution type.</div>
+                    </div>
+                    <div class="log reveal">
+                        <div class="log-entry">
+                            <div class="log-date">JAN 2020 <br />PRESENT</div>
+                            <div class="log-body">
+                                <h3>Senior UI/UX &amp; Web Designer</h3>
+                                <span class="co">Technotery</span>
+                                <div class="log-items">
+                                    <div class="log-item">
+                                        <span class="lbl">SCOPE</span>Led end-to-end UX for 40+ web and mobile
+                                        applications across ERP, healthcare, education, e-commerce, event management,
+                                        and service platforms from discovery through developer handoff.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">RESEARCH</span>Conducted user research, interviews, and
+                                        usability evaluations to translate business goals and user needs into validated
+                                        design solutions.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">IA</span>Designed information architecture, user flows,
+                                        wireframes, and high-fidelity interactive prototypes for complex, multi-module
+                                        products.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">IMPACT</span>Reduced navigation complexity and improved task
+                                        completion by simplifying user flows and standardizing reusable UI components.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">SYSTEM</span>Built and maintained a scalable design system,
+                                        cutting design inconsistencies across parallel projects.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">HANDOFF</span>Partnered closely with developers to ensure
+                                        pixel-perfect, responsive, and accessible implementation across desktop, tablet,
+                                        and mobile.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">AI</span>Adopted AI-assisted tools (ChatGPT, Figma AI,
+                                        Midjourney) to speed up research synthesis, moodboarding, and early-stage
+                                        wireframing without compromising design quality.
+                                    </div>
+                                    <div class="log-item">
+                                        <span class="lbl">DELIVERY</span>Delivered multiple concurrent projects within
+                                        tight deadlines while maintaining consistent design quality and stakeholder
+                                        satisfaction.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WORK / PROJECTS -->
+            <section id="work">
+                <div class="wrap">
+                    <div class="sec-head">
+                        <div>
+                            <div class="sec-index mono">§ 04 - SELECTED WORK</div>
+                            <h2 class="sec-title">Featured projects</h2>
+                        </div>
+                        <div class="sec-note">9 projects · open any prototype live in Figma.</div>
+                    </div>
+
+                    <div class="work-grid reveal">
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/HuqKxXi0fbjSzrJP8sj6xe/e-commerce?node-id=1-7&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A7&show-proto-sidebar=1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-blue">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">
+                                        E-COMMERCE / MOBILE
+                                    </text>
+                                    <g transform="translate(100,80)">
+                                        <path class="ti-fill" d="M-24,-10 L-18,-24 L18,-24 L24,-10 Z" />
+                                        <rect class="ti-fill" x="-26" y="-10" width="52" height="42" rx="4" />
+                                        <path class="ti-stroke" d="M-14,-16 a14,14 0 0 0 28,0" />
+                                        <circle class="ti-accent" cx="-10" cy="20" r="4" />
+                                        <circle class="ti-accent" cx="10" cy="20" r="4" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>E-commerce Mobile App</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A comprehensive e-commerce platform design focused on user experience and conversion
+                                    optimization.
+                                </p>
+                                <div class="proj-tags"><span>UI/UX</span><span>E-commerce</span><span>Figma</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/x8TMQwYl33axuHnqDbXX7a/Kichen-diARY?node-id=0-9516&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=0%3A9516"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-signal">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">KITCHEN / MOBILE</text>
+                                    <g transform="translate(100,84)">
+                                        <path class="ti-fill" d="M-28,-6 a28,20 0 0 0 56,0 Z" />
+                                        <rect class="ti-fill" x="-30" y="-6" width="60" height="8" rx="4" />
+                                        <line class="ti-stroke" x1="-6" y1="-30" x2="-6" y2="-10" />
+                                        <line class="ti-stroke" x1="2" y1="-34" x2="2" y2="-10" />
+                                        <line class="ti-stroke" x1="10" y1="-30" x2="10" y2="-10" />
+                                        <circle class="ti-accent" cx="24" cy="-24" r="7" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Kitchen Diary Mobile App</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A smart kitchen companion app to manage recipes, track ingredients, and plan meals
+                                    effortlessly.
+                                </p>
+                                <div class="proj-tags"><span>UI/UX</span><span>Mobile</span><span>Figma</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/fj5SDz07Vtk63t8GMZDozN/Ikea-Mobile-App?node-id=2001-2&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-sun">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">HOME / MOBILE</text>
+                                    <g transform="translate(100,88)">
+                                        <rect class="ti-fill" x="-26" y="-24" width="52" height="26" rx="6" />
+                                        <rect class="ti-fill" x="-30" y="0" width="60" height="10" rx="3" />
+                                        <line class="ti-stroke" x1="-26" y1="10" x2="-26" y2="24" />
+                                        <line class="ti-stroke" x1="26" y1="10" x2="26" y2="24" />
+                                        <circle class="ti-accent" cx="0" cy="-32" r="6" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Ikea Mobile App</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A stylish home décor app to explore, customize, and shop IKEA furniture with ease.
+                                </p>
+                                <div class="proj-tags">
+                                    <span>Mobile</span><span>Prototyping</span><span>Figma</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/OXzBicqAmG0CSOsux0E7jB/TeamSync.-Project-Management-System-?node-id=0-754"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-blue">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">DASHBOARD / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <line class="ti-stroke" x1="0" y1="-6" x2="-28" y2="18" />
+                                        <line class="ti-stroke" x1="0" y1="-6" x2="0" y2="24" />
+                                        <line class="ti-stroke" x1="0" y1="-6" x2="28" y2="18" />
+                                        <circle class="ti-accent" cx="0" cy="-6" r="8" />
+                                        <circle class="ti-fill" cx="-28" cy="18" r="6" />
+                                        <circle class="ti-fill" cx="0" cy="24" r="6" />
+                                        <circle class="ti-fill" cx="28" cy="18" r="6" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Teamsync</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>A web dashboard for a team &amp; project management system.</p>
+                                <div class="proj-tags">
+                                    <span>Web Design</span><span>Next.js</span><span>Animation</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/8BeiZTaemid8OfQGt1BQpA/Diamonds?node-id=1-14403&t=cuYgK2HX3FZTKQBQ-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-signal">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">JEWELLERY / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <path class="ti-fill" d="M-24,-16 L-10,-24 L10,-24 L24,-16 L0,24 Z" />
+                                        <line class="ti-stroke" x1="-24" y1="-16" x2="24" y2="-16" />
+                                        <line class="ti-stroke" x1="-10" y1="-24" x2="0" y2="-16" />
+                                        <line class="ti-stroke" x1="10" y1="-24" x2="0" y2="-16" />
+                                        <line class="ti-stroke" x1="0" y1="-16" x2="0" y2="24" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Diamond Website</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A luxurious diamond design website showcasing custom-crafted jewelry with timeless
+                                    elegance.
+                                </p>
+                                <div class="proj-tags"><span>Figma</span><span>UI/UX</span><span>Jewellery</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/nH1xdPHy4gvQn450yhvq80/Sparky-shop?node-id=0-4&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-sun">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">ELECTRONICS / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <rect class="ti-fill" x="-16" y="-28" width="32" height="20" rx="4" />
+                                        <line class="ti-stroke" x1="-8" y1="-8" x2="-8" y2="0" />
+                                        <line class="ti-stroke" x1="8" y1="-8" x2="8" y2="0" />
+                                        <rect class="ti-fill" x="-20" y="0" width="40" height="10" rx="3" />
+                                        <path class="ti-accent" d="M2,10 L-8,28 L0,28 L-6,42 L14,20 L4,20 Z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Sparcky Shop Website</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A modern online store for electronic accessories, designed for performance and
+                                    everyday convenience.
+                                </p>
+                                <div class="proj-tags"><span>Web Design</span><span>Figma</span><span>UI/UX</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/EDlNayrpbNUczPLvh9oC1F/Airwelll?node-id=1-1269&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-blue">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">CLEANTECH / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <path
+                                            class="ti-stroke"
+                                            d="M-32,10 Q-22,-14 -12,10 Q-2,-14 8,10 Q18,-14 28,10"
+                                            stroke-width="3"
+                                        />
+                                        <path
+                                            class="ti-accent-stroke"
+                                            d="M-32,24 Q-22,0 -12,24 Q-2,0 8,24 Q18,0 28,24"
+                                            stroke-width="3"
+                                        />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Air Wave</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>A clean, modern web experience built around clarity and smooth navigation.</p>
+                                <div class="proj-tags"><span>Web Design</span><span>Figma</span><span>UI/UX</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/YdA1bgVFlMg30tZ6ypWIxu/Health-mart?node-id=1-2&t=cuYgK2HX3FZTKQBQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-signal">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">WELLNESS / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <path
+                                            class="ti-fill"
+                                            d="M0,20 C-24,2 -30,-16 -14,-22 C-6,-25 0,-18 0,-14 C0,-18 6,-25 14,-22 C30,-16 24,2 0,20 Z"
+                                        />
+                                        <polyline
+                                            class="ti-accent-stroke"
+                                            points="-20,-2 -10,-2 -6,-12 0,6 6,-6 12,-2 22,-2"
+                                            stroke-width="2.5"
+                                            fill="none"
+                                        />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Health Mart Website</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A trusted online destination for protein powders, supporting fitness and active
+                                    lifestyles.
+                                </p>
+                                <div class="proj-tags"><span>Web Design</span><span>Figma</span><span>UI/UX</span></div>
+                            </div>
+                        </a>
+
+                        <a
+                            class="work-card bracketed"
+                            href="https://www.figma.com/proto/7GQNep15h8fHEM880ElHyZ/Webgo?node-id=0-3&scaling=scale-down-width&content-scaling=fixed"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="work-thumb thumb-tint-sun">
+                                <svg class="thumb-icon" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="ti-frame" x="1" y="1" width="198" height="148" rx="8" />
+                                    <circle class="ti-dot" cx="18" cy="18" r="2.5" />
+                                    <circle class="ti-dot" cx="28" cy="18" r="2.5" />
+                                    <text class="ti-label" x="100" y="24" text-anchor="middle">IT / WEB</text>
+                                    <g transform="translate(100,84)">
+                                        <circle class="ti-stroke" cx="0" cy="0" r="26" />
+                                        <ellipse class="ti-stroke" cx="0" cy="0" rx="12" ry="26" />
+                                        <line class="ti-stroke" x1="-26" y1="0" x2="26" y2="0" />
+                                        <line class="ti-stroke" x1="-22" y1="-14" x2="22" y2="-14" />
+                                        <line class="ti-stroke" x1="-22" y1="14" x2="22" y2="14" />
+                                        <circle class="ti-accent" cx="20" cy="-18" r="5" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-top">
+                                    <h3>Web Go Website</h3>
+                                    <span class="work-go">↗</span>
+                                </div>
+                                <p>
+                                    A forward-thinking IT company site delivering digital solutions, from web dev to
+                                    enterprise tech.
+                                </p>
+                                <div class="proj-tags"><span>Web Design</span><span>Figma</span><span>UI/UX</span></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <a class="btn btn-primary" target="_blank" href="https://drive.google.com/drive/folders/162GB7RruOknEEAg4M2NcMdmPJ_ooHNV_?usp=sharing">View more work →</a>
+                </div>
+            </section>
+
+            <!-- STRENGTHS -->
+            <section id="strengths">
+                <div class="wrap">
+                    <div class="sec-head">
+                        <div>
+                            <div class="sec-index mono">§ 05 — TRAITS</div>
+                            <h2 class="sec-title">Strengths &amp; languages</h2>
+                        </div>
+                        <div class="sec-note">B.E. — Engineering &amp; Technology, 2020</div>
+                    </div>
+                    <div class="chip-row reveal">
+                        <span class="chip">Analytical problem-solving</span>
+                        <span class="chip">User-centered design</span>
+                        <span class="chip">Design thinking</span>
+                        <span class="chip">Accessibility-first mindset</span>
+                        <span class="chip">Cross-functional collaboration</span>
+                        <span class="chip">Detail-oriented</span>
+                        <span class="chip">Fast learner</span>
+                    </div>
+                    <div class="chip-row reveal" style="margin-top: 14px">
+                        <span
+                            class="chip"
+                            style="
+                                border-color: var(--blueprint);
+                                color: var(--blueprint);
+                                background: var(--blueprint-dim);
+                            "
+                            >English</span
+                        >
+                        <span
+                            class="chip"
+                            style="
+                                border-color: var(--blueprint);
+                                color: var(--blueprint);
+                                background: var(--blueprint-dim);
+                            "
+                            >Hindi</span
+                        >
+                        <span
+                            class="chip"
+                            style="
+                                border-color: var(--blueprint);
+                                color: var(--blueprint);
+                                background: var(--blueprint-dim);
+                            "
+                            >Gujarati</span
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <footer id="contact">
+                <div class="wrap">
+                    <div class="cta-block reveal">
+                        <div class="sec-index mono">§ 06 — CONTACT</div>
+                        <h2>Currently available for immediate joining - let's design something that ships.</h2>
+                        <a class="btn btn-primary" href="mailto:kajalshukla982@gmail.com">kajalshukla982@gmail.com →</a>
+                    </div>
+                    <div class="contact-grid reveal">
+                        <div>
+                            <div class="lbl">Phone</div>
+                            <a class="val" href="tel:+919106518412">+91 91065 18412</a>
+                        </div>
+                        <div>
+                            <div class="lbl">Location</div>
+                            <div class="val">Ahmedabad, Gujarat, India</div>
+                        </div>
+                        <div>
+                            <div class="lbl">LinkedIn</div>
+                            <a class="val" href="https://www.linkedin.com/in/kajal-shukla-855383200/" target="_blank" rel="noopener">kajal.linkdin</a>
+                        </div>
+                    </div>
+                    <div class="foot-bottom">
+                        <span>© 2026 Kajal Shukla. All rights reserved.</span>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <script>
+            const revealEls = document.querySelectorAll(".reveal");
+            const io = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            e.target.classList.add("in");
+                            io.unobserve(e.target);
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+            revealEls.forEach((el) => io.observe(el));
+
+            const header = document.querySelector("header");
+            window.addEventListener("scroll", () => {
+                header.style.borderBottomColor = window.scrollY > 8 ? "var(--line-strong)" : "var(--line)";
+            });
+        </script>
+    </body>
+</html>
